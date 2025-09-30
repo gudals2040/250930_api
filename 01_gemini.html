@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label> API KEY : <input type="text" id="apiKey" /> </label>
+    <button id="callBtn">호출</button>
+    <script>
+        // 1. input에서 api key를 읽어들여오고 callBtn 이벤트 리스너
+        const apiKeyInput = document.querySelector("#apiKey");
+        const callBtn = document.querySelector("#callBtn");
+        callBtn.addEventListener("click", async () => {
+            const apiKey = apiKeyInput.value; // 처음부터 value로 하면 되지 않나요?
+            // value -> 문자열 -> '값'이 할당이 된다 -> 처음부터 외부에 콜백 전에 복사해놓으면 '빈 값'이 복사되어 있음.
+            console.log(apiykey);
+        })
+    </script>
+  </body>
+</html>
