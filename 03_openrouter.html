@@ -59,7 +59,7 @@
             }, // 맨 위에 system instruction을 깔고
             ...context, // 지금까지의 대화를 context.
           ], // context 모양도 좀 바꿉시다
-          model: groqModel,
+          model: openRouterModel,
         };
         const questionBox = document.createElement("div");
         questionBox.innerHTML = `
