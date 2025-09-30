@@ -19,12 +19,15 @@
       <label>질문 : <input id="question" /></label><br />
       <button id="callBtn">호출</button>
     </section>
+    <!-- 4. dom으로 대화 내용 그리기 -->
+    <section id="dialog"></section>
     <script>
       // 1. input에서 api key를 읽어들여오고 callBtn 이벤트 리스너
       const apiKeyInput = document.querySelector("#apiKey");
       const callBtn = document.querySelector("#callBtn");
       const geminiModelInput = document.querySelector("#geminiModel");
       const questionInput = document.querySelector("#question");
+      const dialog = document.querySelector("#dialog");
       callBtn.addEventListener("click", async () => {
         const apiKey = apiKeyInput.value; // 처음부터 value로 하면 되지 않나요?
         // value -> 문자열 -> '값'이 할당이 된다 -> 처음부터 외부에 콜백 전에 복사해놓으면 '빈 값'이 복사되어 있음
@@ -44,6 +47,12 @@
             },
           ],
         };
+        const questionBox = document.createElement("div");
+        questionBox.innerHTML = `
+          <h4>질문</h4>
+          <p>${question}</p>
+        `;
+        dialog.append(questionBox);
         // 2. 외부 API로 요청 전달
         const response = await fetch(url, {
           // method: "GET", // Form -> GET, POST...
@@ -59,8 +68,15 @@
           body: JSON.stringify(payload),
         });
         const data = await response.json();
-        console.log(data);
-        console.log(data.candidates[0].content.parts[0].text);
+        // console.log(data);
+        // console.log(data.candidates[0].content.parts[0].text);
+        const answer = data.candidates[0].content.parts[0].text;
+        const answerBox = document.createElement("div");
+        answerBox.innerHTML = `
+          <h4>답변</h4>
+          <p>${answer}</p>
+        `;
+        dialog.append(answerBox);
       });
     </script>
   </body>
